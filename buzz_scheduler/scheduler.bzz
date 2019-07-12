@@ -1,0 +1,38 @@
+include "buzz_utils/vec2.bzz"
+include "buzz_utils/string.bzz"
+
+NUMBER_OF_ROBOTS = 5
+
+var current_step_ = 0
+var reception_counter_ = 0
+
+# Executed at init time
+function init() {
+}
+ 
+# Executed every time step
+function step() {
+  if (current_step_ < 2) {
+    neighbors.broadcast("start_step", 1)
+    print(reception_counter_, " = step 0 start_step")
+  }
+
+  neighbors.listen("end_step", 
+    function(vid, value, rid) {    
+        reception_counter_ = reception_counter_ + 1
+        print(reception_counter_, " = counter")
+    }
+  )
+
+  if (reception_counter_ == NUMBER_OF_ROBOTS) {
+    reception_counter_ = 0
+    neighbors.broadcast("start_step", 1)
+    print(reception_counter_, " = Start step")
+  }
+
+  current_step_ = current_step_ + 1
+}
+ 
+# Execute at exit
+function destroy() {
+}
