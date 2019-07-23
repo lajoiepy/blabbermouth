@@ -13,7 +13,7 @@ RUN mkdir ~/code &&\
     code --install-extension ms-vscode.cpptools --user-data-dir ~/code
 
 RUN apt-get install -y git build-essential software-properties-common cmake \
-                        netcat net-tools
+                        netcat net-tools pkg-config
 
 # Add dummy argument to force rebuild starting from that point
 ARG CODE_UPDATE=unknown

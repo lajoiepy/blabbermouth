@@ -1,0 +1,8 @@
+./blabbermouth -s 50000 1:tcp:1:localhost:24580 2:tcp:1:localhost:24581 3:tcp:1:localhost:24582 4:tcp:1:localhost:24583 5:tcp:1:localhost:24584 6:tcp:1:localhost:24585
+
+
+./generic_robot_buzz_slam tcp 50000 ../../scripts/dataset_test.bo ../../scripts/dataset_test.bdb 0 24580
+
+./scheduler tcp 100000 ../scheduler.bo ../scheduler.bdb 24585
+
+./blabbermouth -s 100000 1:tcp:1:192.168.12.100:24580 2:tcp:1:192.168.12.100:24581 3:tcp:1:192.168.12.101:24582 4:tcp:1:192.168.12.101:24583 5:tcp:1:192.168.12.101:24584 6:tcp:1:localhost:24585
