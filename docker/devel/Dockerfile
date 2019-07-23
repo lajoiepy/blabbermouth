@@ -1,16 +1,17 @@
-FROM ubuntu:18.04
+FROM ros:melodic-perception
 LABEL Maintainer="Pierre-Yves Lajoie <lajoie.py@gmail.com>"
 
 # Install and setup some editing and debugging tools
-RUN apt-get update &&\
-    apt-get install -y gedit nano strace valgrind wget
+RUN apt-get update
+#RUN apt-get update &&\
+#    apt-get install -y gedit nano strace valgrind wget
 
-RUN wget -O vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868 &&\
-    apt install -y ./vscode.deb &&\
-    apt install -y libasound2
+#RUN wget -O vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868 &&\
+#    apt install -y ./vscode.deb &&\
+#    apt install -y libasound2
 
-RUN mkdir ~/code &&\
-    code --install-extension ms-vscode.cpptools --user-data-dir ~/code
+#RUN mkdir ~/code &&\
+#    code --install-extension ms-vscode.cpptools --user-data-dir ~/code
 
 RUN apt-get install -y git build-essential software-properties-common cmake \
                         netcat net-tools pkg-config
