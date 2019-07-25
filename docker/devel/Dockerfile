@@ -3,15 +3,9 @@ LABEL Maintainer="Pierre-Yves Lajoie <lajoie.py@gmail.com>"
 
 # Install and setup some editing and debugging tools
 RUN apt-get update
-#RUN apt-get update &&\
-#    apt-get install -y gedit nano strace valgrind wget
 
-#RUN wget -O vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868 &&\
-#    apt install -y ./vscode.deb &&\
-#    apt install -y libasound2
-
-#RUN mkdir ~/code &&\
-#    code --install-extension ms-vscode.cpptools --user-data-dir ~/code
+RUN apt-get update &&\
+    apt-get install -y nano vim
 
 RUN apt-get install -y git build-essential software-properties-common cmake \
                         netcat net-tools pkg-config
@@ -27,9 +21,10 @@ RUN git clone https://github.com/lajoiepy/blabbermouth.git &&\
     cmake ../src &&\
     make
 
-# Put your own git credentials to commit edited code
-RUN git config --global user.email "lajoie.py@gmail.com" &&\
-    git config --global user.name "Pierre-Yves Lajoie"
-
 # Entry point to start the module
 WORKDIR /blabbermouth/build
+
+COPY entrypoint.sh entrypoint.sh
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["/blabbermouth/build/entrypoint.sh"]
+CMD ["0", "1"]
